@@ -8,11 +8,6 @@ The automotive domain is full of critical systems/situations where a formal spec
 [![alt text](https://lamport.azurewebsites.net/tla/splash_small.png)](https://lamport.azurewebsites.net/tla/tla.html)
 
 
-## Setup
-
-In order to execute [SCS.tla](SCS.tla) specification in TLA+, one only needs to download the ToolBox from [here](https://tla.msr-inria.inria.fr/tlatoolbox/products/). After extracting the .zip file, the resulting folder will contain a file named "toolbox" which launches the tool itself.
-
-
 ## Abstract
 
 In essence, we define multiple **variables** to which we assign multiple values. The content of each of these variables changes according to a given **predicate** that fits the actual state. In another words, given a state, there are one or more actions that can be applied to that state, as long as these action(s) (predicate(s)) match the same given state. There are also **invariants** which are conditional expressions that are constantly compared to the actual state - these assess if there isn't any incompatibility of the state with the existing properties. 
@@ -60,6 +55,12 @@ By specifying a model like this, it is then possible to navigate through the exi
     + TurnLever5 - Activates or deactivates speed limit depending on the actual state.
     + TurnEngineOff - Turn engine off.  
     + TurnEngineOn - Turn engine on.
+
+
+## Setup
+
+In order to execute [SCS.tla](SCS.tla) specification in TLA+, one only needs to download the ToolBox from [here](https://tla.msr-inria.inria.fr/tlatoolbox/products/). After extracting the .zip file, the resulting folder will contain a file named "toolbox" which launches the tool itself.
+
 
 ## Execution
 
