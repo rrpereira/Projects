@@ -1,0 +1,70 @@
+//asbtract feature
+root Turtlebot3 {
+    group allOf {
+        Model,
+        opt Cameras,
+        opt Teleop,
+        opt Navigation,
+        opt SLAM,
+        opt Remote,
+        opt Controladores
+    }
+    Raspi -> Waffle_pi;
+    SLAM -> Visualização;
+    Cartographer -> !Frontier_exploration;
+    Cartographer -> !Gmapping;
+    Cartographer -> !Hector;
+    Cartographer -> !Karto;
+    Frontier_exploration -> !Gmapping;
+    Frontier_exploration -> !Hector;
+    Frontier_exploration -> !Karto;
+    Gmapping -> !Hector;
+    Gmapping -> !Karto;
+    Hector -> !Karto;
+}
+
+//abstract model
+Model {
+    group oneOf {
+        Burger,
+        Waffle,
+        Waffle_pi
+    }
+}
+
+Cameras {
+    group allOf {
+        opt Realsense,
+        opt Raspi   
+    }
+}
+
+//abstract feature
+SLAM {
+    group someOf {
+        Cartographer,
+        Frontier_exploration,
+        Gmapping,
+        Hector,
+        Karto,
+        Manipulation
+    }
+}
+
+Remote {
+    group allof {
+        opt Visualização
+    }
+}
+
+Controladores {
+    group oneOf {
+        Bumper,
+        Cliff,
+        Ilumination,
+        Obstacle,
+        Sonar,
+        Pointop_key,
+        Markers
+    }
+}

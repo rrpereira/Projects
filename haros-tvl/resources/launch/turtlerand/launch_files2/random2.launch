@@ -1,0 +1,10 @@
+<launch>
+    <arg name="multiplexer"/>
+    
+    <param name="vel" type="double" value="0.5" />
+
+    <node pkg="turtlerand" type="random_controller" name="random_controller">
+            <remap from="cmd_vel" to="/turtle1/cmd_vel"/>
+            <remap from="cmd_vel" to="cmd_vel_low" if="$(arg multiplexer)"/>-->
+    </node>
+</launch>

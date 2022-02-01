@@ -1,0 +1,35 @@
+root Lizi {
+    group allOf {
+        opt Hw,
+        opt Navigation,
+        opt Espeak,
+        opt Robot_state,
+        opt Gazebo
+    }
+    Gmapping -> (Move_base && Lidar);
+    Hector_slam -> (Move_base && Lidar);
+    Amcl -> (Move_base && Lidar && Map);
+}
+
+Hw {
+    group someOf {
+        Depth_cam,
+        Lidar,
+        Cam,
+        Diagnos
+    }
+}
+
+Navigation {
+    group someOf {
+        Gmapping,
+        Hector_slam,
+        Robot_localization,
+        Amcl,
+        Move_base,
+        Map
+    }
+}
+
+
+

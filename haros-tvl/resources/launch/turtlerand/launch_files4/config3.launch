@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="Turtlerand" value="true"/>
+  <arg name="Turtlesim" value="true"/>
+  <arg name="Teleop" value="true"/>
+  <arg name="Random" value="true"/>
+  <include file="resources/launch/launch_files4/general_includes4_copy.launch">
+    <arg name="Turtlerand" value="$(arg Turtlerand)"/>
+    <arg name="Turtlesim" value="$(arg Turtlesim)"/>
+    <arg name="Teleop" value="$(arg Teleop)"/>
+    <arg name="Random" value="$(arg Random)"/>
+  </include>
+</launch>

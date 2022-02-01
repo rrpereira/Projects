@@ -1,0 +1,63 @@
+//abstract feature
+root TurtleBot {
+    group allOf {
+        opt Minimal,
+        opt Teleop
+    }
+    Logitech -> !Ps3;
+    Logitech -> !Xbox360;
+    Ps3 -> !Xbox360;
+}
+
+Minimal {
+    group allOf {
+        Base,
+        Sensor_3D,
+        Stacks,
+        opt Battery
+    }
+}
+
+//abstract feature
+Base {
+    group oneOf {
+        Create,
+        Roomba,
+        Kobuki
+    }
+}
+
+Kobuki {
+    group allOf {
+        opt Bumper2pc,
+        opt Safety_controller
+    }
+}
+
+//abstract feature
+Sensor_3D {
+    group oneOf {
+        Kinect,
+        Asus_xtion_pro,
+        Astra,
+        R200
+    }
+}
+
+//abstract feature
+Stacks {
+    group oneOf {
+        Circles, 
+        Hexagons
+    }
+}
+
+//abstract feature
+Teleop {
+    group someOf {
+        Keyboard, 
+        Logitech,
+        Ps3,
+        Xbox360    
+    }
+}

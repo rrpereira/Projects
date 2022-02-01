@@ -1,0 +1,42 @@
+root Kobuki {
+    group allOf {
+        
+        Base,
+        opt Bumper2pc,
+        opt Auto_docking,
+        opt Safety,
+        opt Keyop,
+        opt Random
+    }
+    Keyop_safe -> !Random_safe;
+    Keyop_safe -> !Safety;
+    Random_safe -> !Safety;
+    Random_safe -> !Auto_safe_keyop;
+    Safety -> !Auto_safe_keyop;
+    Auto_safe_keyop -> !Keyop;
+}
+
+Base {
+    group oneOf {
+        Minimal,
+        Tf
+    }
+}
+
+Auto_docking {
+    group allOf {
+        Auto_safe_keyop
+    }
+}
+
+Keyop {
+    group allOf {
+        opt Keyop_safe
+    }
+}
+
+Random {
+    group allOf {
+        opt Random_safe
+    }
+}

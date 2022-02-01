@@ -1,0 +1,27 @@
+<!--The user chooses which features are launched (including multiplexer).-->
+<!--Command example: $roslaunch turtlerand general_includes3.launch first:=true-->
+<!--ROS doesn't allow options first and second, for example, to be launched simultaneously, probably because there are two turtlesims being launched.-->
+
+<launch>    
+
+    <arg name="first" default="false"/>
+    <arg name="second" default="false"/>
+    <arg name="third" default="false"/>
+
+    <group if="$(arg first)">    
+        <include file="$(find turtlerand)/launch/launch_files3/first3.launch"/>
+    </group>
+
+    <group if="$(arg second)">
+        <include file="$(find turtlerand)/launch/launch_files3/second3.launch"/>
+    </group>
+
+    <group if="$(arg third)">
+        <include file="$(find turtlerand)/launch/launch_files3/third3.launch"/>
+    </group>
+    
+</launch>
+
+
+
+

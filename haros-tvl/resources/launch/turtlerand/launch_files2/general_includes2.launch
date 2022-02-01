@@ -1,0 +1,52 @@
+<!--The multiplexer is launched if random and teleop are launched simultaneously.
+This may be a better approach as one never chooses if the multiplexer is or is not launched. 
+This approach is probably more in line with the feature model.-->
+<!--Command example: roslaunch turtlerand general_includes2.launch random:=true teleop:=true-->
+
+<launch>
+
+    <arg name="turtlesim" default="true"/>
+    <!--<arg name="multiplexer" default="false"/> não deixa dar overide nisto depois o que complica muito mais as coisas-->
+    <arg name="teleop" default="false"/>
+    <arg name="random" default="false"/>
+
+    <group if="$(arg turtlesim)">    
+        <include file="$(find turtlerand)/launch/launch_files2/turtlesim2.launch"/>
+    </group>
+
+    <group if="$(arg teleop)">
+        <group if="$(arg random)">  
+            <arg name="multiplexer" default="true"/>
+            <include file="$(find turtlerand)/launch/launch_files2/multiplexer2.launch"/>
+            <include file="$(find turtlerand)/launch/launch_files2/random2.launch">
+                <arg name="multiplexer" value="$(arg multiplexer)"/>       
+            </include>
+            <include file="$(find turtlerand)/launch/launch_files2/teleop2.launch">
+                <arg name="multiplexer" value="$(arg multiplexer)"/>       
+            </include>
+        </group>
+    </group>
+
+    <group if="$(arg random)"> 
+        <group unless="$(arg teleop)">
+            <include file="$(find turtlerand)/launch/launch_files2/random2.launch">
+                <arg name="multiplexer" default="false"/>
+                <arg name="multiplexer" value="$(arg multiplexer)"/>       
+            </include>
+        </group>
+    </group>
+
+    <group if="$(arg teleop)"> 
+        <group unless="$(arg random)">
+            <include file="$(find turtlerand)/launch/launch_files2/teleop2.launch">
+                <arg name="multiplexer" default="false"/>
+                <arg name="multiplexer" value="$(arg multiplexer)"/>       
+            </include>
+        </group>
+    </group>
+    
+</launch>
+
+
+
+

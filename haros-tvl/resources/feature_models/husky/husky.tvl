@@ -1,0 +1,71 @@
+root Husky {
+    group oneOf {
+        Real,
+        Simulation
+    }
+    Empty_world -> Real_sense;
+    Husky_playpen -> Real_sense;
+       
+}
+
+Real {
+    group allOf {
+        opt Navigation,
+        opt Realsense,
+        opt Imu,
+        opt Navsat,
+        opt LiDAR,
+        opt Visualização
+    }
+}
+
+Simulation {
+    group allOf {
+        Map,
+        opt Real_sense,
+        opt Extra_husky
+    }
+}
+
+Navigation {
+    group oneOf {
+        Amcl,
+        Gmapping
+    }
+}
+
+Imu {
+    group oneOf {
+        Microstrain_gx3,
+        Microstrain_gx5,
+        Um6,
+        Um7   
+    }
+}
+
+LiDAR {
+    group oneOf {
+        Lms1xx,
+        Vlp16
+    }
+}
+
+Visualização {
+    group allOf {
+        opt View_model,
+        opt View_robot  
+    }
+}
+
+Map {
+    group allOf {
+        opt Empty_world,
+        opt Playpen
+    }
+}
+
+Playpen {
+    group allOf {
+        opt Husky_playpen
+    }
+}

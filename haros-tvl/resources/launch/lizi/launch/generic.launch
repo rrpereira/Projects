@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- lizi generic launch -->
+
+<launch>
+
+    <!--  Added by me    -->
+    <arg name="Lizi"/>
+    <arg name="Hw"/>
+    <arg name="Navigation"/>
+
+    <!--  hardware    -->
+    <arg name="Cam"/>
+    <arg name="Depth_cam"/>
+    <arg name="Lidar"/>
+    <arg name="Diagnos"/>
+
+    <!--   navigation and mapping   -->
+    <arg name="Gmapping"/>
+    <arg name="Hector_slam"/>
+    <arg name="Amcl"/>
+    <arg name="Map" doc="set to true to use pre-saved map"/>
+    <arg name="Move_base"/>
+    <arg name="Robot_localization"/>
+    <arg name="Espeak"/>
+    <arg name="Robot_state"/>
+    <arg name="Gazebo"/>
+
+    <group>
+        <arg name="gazebo" default="false" doc="execute lizi inside gazebo sim"/>
+        <arg name="world" default="worlds/empty.world"/>
+        <arg name="x" default="0.0"/>
+        <arg name="y" default="0.0"/>
+        <arg name="z" default="0.0"/>
+        <arg name="Y" default="0.0" />
+        <arg name="map" default="map.yaml" doc="pre-saved map path"/>
+
+        <!--Independent elements-->
+        <group if="$(arg Robot_state)">
+            <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+        </group>
+
+        <group if="$(arg Espeak)">
+            <include file="$(find espeak_ros)/launch/espeak_ros.launch" />
+        </group>
+
+
+        <group if="$(arg Diagnos)">
+            <include file="$(find lizi_hw)/launch/diagnostics.launch" />
+        </group>
+
+        <group if="$(arg Amcl)">
+            <!-- TODO: THIS NODE IS REPEATED-->
+            <include file="$(find lizi_control)/launch/lizi_controllers.launch">
+                <arg name="enable_mbc_odom_tf" value="true"/>
+            </include>
+        </group>
+
+        <group if="$(arg Robot_localization)">
+            <!-- TODO: THIS NODE IS REPEATED-->
+            <include file="$(find lizi_control)/launch/lizi_controllers.launch">
+                <arg name="enable_mbc_odom_tf" value="false"/>
+            </include>
+        </group>
+
+        <group unless="$(arg Robot_localization)">
+            <group unless="$(arg Amcl)">
+                <!-- TODO: THIS NODE IS REPEATED-->
+                <include file="$(find lizi_control)/launch/lizi_controllers.launch">
+                    <arg name="enable_mbc_odom_tf" value="true"/>
+                </include>
+            </group>
+        </group>
+
+        <group if="$(arg Map)">
+            <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" />
+        </group>
+
+        <!--if no one publish map-odom tf, load static tf-->
+        <group unless="$(arg Gmapping)">
+            <group unless="$(arg Hector_slam)">
+                <group unless="$(arg Amcl)">
+                    <group unless="$(arg Robot_localization)">
+                        <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 20" />
+                    </group>
+                </group>
+            </group>
+        </group>
+
+        <!--load simulation stuff-->
+        <group if="$(arg Gazebo)">
+            <!-- <env name="GAZEBO_MODEL_PATH" value="$(find lizi_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>-->
+            <param name="robot_description" command="$(find xacro)/xacro '$(find lizi_description)/urdf/lizi_gazebo.xacro' --inorder depth_cam:=$(arg depth_cam) cam:=$(arg cam) urf:=true imu:=true gps:=true lidar:=true" />
+
+            <include file="$(find gazebo_ros)/launch/empty_world.launch">
+                <arg name="world_name" value="$(arg world)"/>
+                <arg name="gui" value="true"/>
+            </include>
+
+            <node name="lizi_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model lizi -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg Y)" />
+        </group>
+
+        <!--load hardware stuff-->
+        <group unless="$(arg Gazebo)">
+            <param name="robot_description" command="$(find xacro)/xacro '$(find lizi_description)/urdf/lizi.xacro' --inorder" />
+            <include file="$(find lizi_hw)/launch/lizi_hw.launch" />
+
+            <group if="$(arg Depth_cam)">
+                <include file="$(find lizi_hw)/launch/d435_cam.launch" />
+            </group>
+
+            <group if="$(arg Cam)">
+                <include file="$(find lizi_hw)/launch/microsoft_cam.launch" />
+            </group>
+
+            <group if="$(arg Lidar)">
+                <include file="$(find lizi_hw)/launch/hokuyu_lidar.launch" />
+            </group>
+
+        </group>
+
+
+        <group if="$(arg Gmapping)">
+            <include file="$(find lizi_navigation)/launch/gmapping.launch" />
+        </group>
+
+        <group if="$(arg Hector_slam)">
+            <include file="$(find lizi_navigation)/launch/hector_slam.launch" />
+        </group>
+
+        <group if="$(arg Robot_localization)">
+            <include file="$(find lizi_navigation)/launch/robot_localization.launch" />
+        </group>
+
+        <group if="$(arg Amcl)">
+            <include file="$(find lizi_navigation)/launch/amcl.launch">
+                <arg name="initial_pose_x" value="$(arg x)"/>
+                <arg name="initial_pose_y" value="$(arg y)"/>
+                <arg name="initial_pose_a" value="$(arg Y)"/>
+            </include>
+        </group>
+
+
+        <group if="$(arg Move_base)">
+            <include file="$(find lizi_navigation)/launch/move_base.launch" />
+            <rosparam file="$(find lizi_navigation)/config/move_base_params.yaml" command="load" ns="move_base"/>
+            <rosparam file="$(find lizi_navigation)/config/costmap_common_params.yaml" command="load" ns="move_base/global_costmap" />
+            <rosparam file="$(find lizi_navigation)/config/costmap_common_params.yaml" command="load" ns="move_base/local_costmap" />
+            <rosparam file="$(find lizi_navigation)/config/local_costmap_params.yaml" command="load" ns="move_base/local_costmap" />
+            <rosparam file="$(find lizi_navigation)/config/global_costmap_params.yaml" command="load" ns="move_base/global_costmap"/>
+        </group>
+
+
+    </group>
+
+
+
+</launch>

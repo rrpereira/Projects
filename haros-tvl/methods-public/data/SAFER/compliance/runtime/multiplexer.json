@@ -1,0 +1,15 @@
+[
+  {
+    "comment":"Query found: NodeInstance multiplexer:/random_controller\nReported in configuration multiplexer",
+    "resources":[
+      {
+        "resourceType":"node",
+        "name":"/random_controller"
+      }
+    ],
+    "location":{
+      "configuration":"multiplexer"
+    },
+    "rule":"user:parameters_readers"
+  }
+]

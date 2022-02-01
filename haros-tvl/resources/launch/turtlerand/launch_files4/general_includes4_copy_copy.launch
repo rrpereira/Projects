@@ -1,0 +1,49 @@
+<!--Esta solução não funciona pq os ifs onde são usados os multiplexers não conhecem o argumentos Multiplexer..
+ -->
+
+<launch>
+    <!--No LF genérico não posso por o atributo value na tag
+        "arg" porque assim as configs não conseguem passar 
+        argumentos e o roslaunch dá erro-->
+    <arg name="Turtlesim"/>
+    <arg name="Turtlerand"/>
+    <arg name="Teleop"/>
+    <arg name="Random"/>
+
+    <group if="$(arg Random)">
+        <group if="$(arg Teleop)">
+            <arg name="Multiplexer" value="true"/>
+        </group>
+    </group>
+
+    <group if="$(arg Turtlesim)">
+        <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node"/>
+    </group>
+
+    <group if="$(arg Random)">
+        <group if="$(arg Teleop)">
+            <node pkg="turtlerand" type="multiplexer" name="multiplexer">
+                <remap from="cmd_vel" to="/turtle1/cmd_vel"/>
+            </node>
+        </group>
+    </group>
+
+    <group if="$(arg Teleop)">
+        <node pkg="turtlesim" type="turtle_teleop_key" name="turtle_teleop_key">
+            <remap from="/turtle1/cmd_vel" to="cmd_vel_high" if="$(arg Multiplexer)"/>
+        </node>
+    </group>
+
+    <group if="$(arg Random)">
+        <param name="vel" type="double" value="0.5" />
+
+        <node pkg="turtlerand" type="random_controller" name="random_controller">
+            <remap from="cmd_vel" to="/turtle1/cmd_vel"/>
+            <remap from="cmd_vel" to="cmd_vel_low" if="$(arg Multiplexer)"/>
+        </node>
+    </group>
+
+</launch>
+
+
+

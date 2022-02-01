@@ -1,0 +1,10 @@
+[
+  {
+    "packages":[
+      "turtlerand",
+      "turtlesim"
+    ],
+    "repositories":[],
+    "id":"SAFER"
+  }
+]

@@ -1,0 +1,34 @@
+<!--The user chooses which features are launched (including multiplexer).-->
+<!--Command example: $roslaunch turtlerand general_includes1.launch teleop:=true random:=true multiplexer:=true-->
+<launch>
+
+    <arg name="random" default="false"/>
+    <arg name="teleop" default="false"/>
+    <arg name="multiplexer" default="false"/>
+    <arg name="turtlesim" default="true"/>
+
+    <group if="$(arg turtlesim)">
+        <include file="$(find turtlerand)/launch/launch_files1/turtlesim1.launch"/>
+    </group>
+
+    <group if="$(arg multiplexer)">
+        <include file="$(find turtlerand)/launch/launch_files1/multiplexer1.launch"/>
+    </group>
+
+    <group if="$(arg teleop)">
+        <include file="$(find turtlerand)/launch/launch_files1/teleop1.launch">
+            <arg name="multiplexer" value="$(arg multiplexer)"/>
+        </include>
+    </group>
+
+    <group if="$(arg random)">
+        <include file="$(find turtlerand)/launch/launch_files1/random1.launch">
+            <arg name="multiplexer" value="$(arg multiplexer)"/>
+        </include>
+    </group>
+
+</launch>
+
+
+
+

@@ -1,0 +1,43 @@
+[
+  {
+    "wiki":null,
+    "metapackage":false,
+    "description":"The turtlerand package",
+    "repository":null,
+    "maintainers":[
+      "rrp"
+    ],
+    "dependencies":[
+      "rospy",
+      "roscpp"
+    ],
+    "authors":[],
+    "bugTracker":null,
+    "id":"turtlerand",
+    "size":"29.20",
+    "lines":847,
+    "analysis":{
+      "metrics":{},
+      "violations":{
+        "haros_plugin_cpplint:deprecated_casting":1,
+        "haros_plugin_cppcheck:cppcheckRule":1,
+        "haros_plugin_cpplint:no_copyright":2,
+        "haros_plugin_cpplint:two_space_indent":1,
+        "haros_plugin_cpplint:whitespace_open_brace":6,
+        "haros_plugin_cpplint:max_line_length_80":7,
+        "haros_plugin_cpplint:whitespace_end_line":8,
+        "haros_plugin_cpplint:whitespace_before_comments":14,
+        "haros_plugin_cppcheck:harosIntegerTypes":3,
+        "haros_plugin_cpplint:whitespace_before_comment_text":14,
+        "haros_plugin_cpplint:thread_safe_functions":1,
+        "haros_plugin_cppcheck:unreadVariable":2,
+        "haros_plugin_cpplint:whitespace_before_paren_if":1,
+        "haros_plugin_cpplint:newline_terminator":2,
+        "haros_plugin_cpplint:opening_brace_line":6,
+        "haros_plugin_cpplint:include_order":4
+      }
+    },
+    "version":"0.0.0",
+    "sloc":672
+  }
+]

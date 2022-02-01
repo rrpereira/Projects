@@ -1,0 +1,40 @@
+root Robot {
+    group allOf {
+        ArmType 
+        Effector
+        LoadTimeConfigured
+        RuntimeConfiguredPlugins
+    }
+}
+
+RuntimeConfiguredPlugins { 
+    group allOf {
+        opt GrasperLimits,
+        opt Scale,
+        opt AlphaAngle,
+        DummyController,
+        Clutch, 
+        GeomagicTouch,
+        HomePosition,
+        ButtonInterface        
+    }
+}
+
+GeomagicTouch {
+    group allOf{
+        GT_AngleType,
+        GT_SelectedDevice,
+        GT_ArmFunctions
+    }
+}
+
+GT_ArmFunctions {
+    group allOf {
+        opt GT_ClampClose,
+        opt GT_ExpandOpen,
+        opt GT_WristRotate,
+        opt GT_EffectorBend,
+        opt GT_HapticFeedback,
+        GT_ArmBend
+    }
+}

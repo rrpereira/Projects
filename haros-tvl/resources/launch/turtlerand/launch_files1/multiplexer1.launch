@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="turtlerand" type="multiplexer" name="multiplexer">
+        <remap from="cmd_vel" to="/turtle1/cmd_vel"/>
+    </node>
+</launch>

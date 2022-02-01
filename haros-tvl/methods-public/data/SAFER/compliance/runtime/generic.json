@@ -1,0 +1,15 @@
+[
+  {
+    "comment":"Query found: NodeInstance generic:/Random\nReported in configuration generic",
+    "resources":[
+      {
+        "resourceType":"node",
+        "name":"/Random"
+      }
+    ],
+    "location":{
+      "configuration":"generic"
+    },
+    "rule":"user:parameters_readers"
+  }
+]

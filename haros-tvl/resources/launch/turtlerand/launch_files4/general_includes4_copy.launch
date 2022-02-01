@@ -1,0 +1,54 @@
+<!--Esta solução funciona mas tem prós e contras:
+    PROS:
+        - está mais sucinto
+        - introduz a tag node só uma vez para cada node 
+    CONTRAS:
+        - não funciona no caso de haverem mais que dois nodes a escreverem para o multiplexer, pq o if do remap só leva um argumento (acho eu)
+                            era neste caso específico que a feature multiplexer resolvia, pq a simples existência do multiplexer
+                            permitia que apenas fosse necessário um if no remap: <remap from="cmd_vel" to="cmd_vel_low" if="$(arg multiplexer)"/>
+                                                TENTATIVA DE RESOLUÇÃO no copy_copy !!!
+ -->
+
+<launch>
+    <!--No LF genérico não posso por o atributo value na tag
+        "arg" porque assim as configs não conseguem passar 
+        argumentos e o roslaunch dá erro-->
+    <arg name="Turtlesim" default="false"/>
+    <arg name="Turtlerand"/>
+    <arg name="Teleop"/>
+    <arg name="Random"/>
+
+    <group if="$true">
+        <group if="$(arg Turtlesim)">
+            <node pkg="turtlesim" type="turtlesim_node" name="Turtlesim"/>
+        </group>
+
+        <group if="$(arg Random)">
+            <group if="$(arg Teleop)">
+                <node pkg="turtlerand" type="multiplexer" name="Multiplexer">
+                    <remap from="cmd_vel" to="/turtle1/cmd_vel"/>
+                </node>
+            </group>
+        </group>
+
+        <group if="$(arg Teleop)">
+            <node pkg="turtlesim" type="turtle_teleop_key" name="Teleop">
+                <remap from="/turtle1/cmd_vel" to="cmd_vel_high" if="$(arg Random)"/>
+            </node>
+        </group>
+
+        <group if="$(arg Random)">
+            <param name="vel" type="double" value="0.5" />
+
+            <node pkg="turtlerand" type="random_controller" name="Random">
+                <remap from="cmd_vel" to="cmd_vel_low" if="$(arg Teleop)"/>
+                <remap from="cmd_vel" to="/turtle1/cmd_vel" unless="$(arg Teleop)"/>
+            </node>
+        </group>
+    </group>
+
+
+</launch>
+
+
+

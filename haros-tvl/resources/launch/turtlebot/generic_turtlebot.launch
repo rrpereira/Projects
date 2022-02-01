@@ -1,0 +1,214 @@
+<launch>
+  <arg name="TurtleBot"/>
+  <arg name="Minimal"/>
+  <arg name="Base" doc="mobile base type [create, roomba]"/>
+  <arg name="Battery"/>
+  <arg name="Sensor_3D" doc="3d sensor types [kinect, asux_xtion_pro]"/>
+  <arg name="Stacks" doc="stack type displayed in visualisation/simulation [circles, hexagons]"/>
+  <arg name="Create"/>
+  <arg name="Roomba"/>
+  <arg name="Kobuki"/>
+  <arg name="Kinect"/>
+  <arg name="Asus_xtion_pro"/>
+  <arg name="Circles"/>
+  <arg name="Hexagons"/>
+  <arg name="Keyboard"/>
+  <arg name="Teleop"/>
+  <arg name="Logitech"/>
+  <arg name="Ps3"/>
+  <arg name="Xbox360"/>
+  <!--Carefull with the includes made according to these args bellow.-->
+  <arg name="Safety_controller"/>
+  <arg name="Bumper2pc"/>
+  <arg name="Astra"/>
+  <arg name="R200"/>
+
+  <group>
+
+    <arg name="simulation" default="$(env TURTLEBOT_SIMULATION)" doc="set flags to indicate this turtle is run in simulation mode."/>
+    <arg name="serialport" default="$(env TURTLEBOT_SERIAL_PORT)" doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+    <arg name="battery" doc="kernel provided locatio for battery info, use /proc/acpi/battery/BAT0 in 2.6 or earlier kernels." />
+
+    <param name="/use_sim_time" value="$(arg simulation)"/>
+
+    <group if="$(arg Base)">
+      <group if="$(arg Stacks)">
+        <group if="$(arg Sensor_3D)">
+
+          <group if="$(arg Create)">
+
+            <group if="$(arg Circles)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/create_circles_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/create_circles_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+            <group if="$(arg Hexagons)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/create_hexagons_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/create_hexagons_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+            <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
+              <rosparam command="load" file="$(find turtlebot_bringup)/param/create/diagnostics.yaml" />
+            </node>
+
+            <include file="$(find turtlebot_bringup)/launch/includes/create/mobile_base.launch.xml">
+              <arg name="serialport" value="$(arg serialport)"/>
+              <arg name="manager" value="mobile_base_nodelet_manager"/>
+            </include>
+          </group>
+
+          <group if="$(arg Roomba)">
+
+            <group if="$(arg Circles)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/roomba_circles_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/roomba_circles_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+            <group if="$(arg Hexagons)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/roomba_hexagons_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/roomba_hexagons_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+            <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
+              <rosparam command="load" file="$(find turtlebot_bringup)/param/roomba/diagnostics.yaml" />
+            </node>
+
+            <include file="$(find turtlebot_bringup)/launch/includes/roomba/mobile_base.launch.xml">
+              <arg name="serialport" value="$(arg serialport)"/>
+              <arg name="manager" value="mobile_base_nodelet_manager"/>
+            </include>
+          </group>
+
+
+
+
+
+          <group if="$(arg Kobuki)">
+
+            <group if="$(arg Circles)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/kobuki_circles_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/kobuki_circles_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+            <group if="$(arg Hexagons)">
+              <group if="$(arg Kinect)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/kobuki_hexagons_kinect.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+              <group if="$(arg Asus_xtion_pro)">
+                <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/kobuki_hexagons_asus_xtion_pro.urdf.xacro'" />
+                <param name="robot_description" command="$(arg urdf_file)" />
+              </group>
+            </group>
+
+
+
+
+            <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
+              <rosparam command="load" file="$(find turtlebot_bringup)/param/kobuki/diagnostics.yaml" />
+            </node>
+
+            <include file="$(find turtlebot_bringup)/launch/includes/kobuki/mobile_base.launch.xml">
+              <arg name="serialport" value="$(arg serialport)"/>
+              <arg name="manager" value="mobile_base_nodelet_manager"/>
+            </include>
+
+          </group>
+
+
+        </group>
+      </group>
+    </group>
+
+
+    <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+
+    <!-- important generally, but specifically utilised by the current app manager -->
+    <param name="robot/name" value="$(optenv ROBOT turtlebot)"/>
+    <param name="robot/type" value="turtlebot"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="5.0" />
+    </node>
+
+
+    <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
+      <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml"/>
+      <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
+    </node>
+
+    <group if="$(arg Battery)">
+      <include unless="$(eval arg('battery') == 'None')" file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
+        <arg name="battery" value="$(arg battery)" />
+      </include>
+    </group>
+
+
+    <group if="$(arg Teleop)">
+      <group if="$(arg Keyboard)">
+        <include file="$(find turtlebot_teleop)/launch/keyboard_teleop.launch"/>
+      </group>
+
+      <group if="$(arg Logitech)">
+        <include file="$(find turtlebot_teleop)/launch/logitech.launch"/>
+
+      </group>
+      <group if="$(arg Ps3)">
+        <include file="$(find turtlebot_teleop)/launch/ps3_teleop.launch"/>
+      </group>
+
+      <group if="$(arg Xbox360)">
+        <include file="$(find turtlebot_teleop)/launch/xbox360_teleop.launch"/>
+      </group>
+    </group>
+
+    <!--Not sure if the includes bellow are being well done.-->
+    <group if="$(arg R200)">
+      <include file="$(find realsense_camera)/launch/r200_nodelet_default.launch.xml"/>
+    </group>
+
+    <group if="$(arg Safety_controller)">
+      <include file="$(find turtlebot_bringup)/launch/includes/kobuki/safety_controller.xml"/>
+    </group>
+
+    <group if="$(arg Bumper2pc)">
+      <include file="$(find kobuki_bumper2pc)/launch/standalone.launch"/>
+    </group>
+
+    <group if="$(arg Astra)">
+      <include file="$(find astra_launch)/launch/astra.launch"/>
+    </group>
+
+  </group>
+
+</launch>

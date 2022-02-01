@@ -1,0 +1,15 @@
+[
+  {
+    "comment":"Query found: NodeInstance launch_files4:/Random\nReported in configuration launch_files4",
+    "resources":[
+      {
+        "resourceType":"node",
+        "name":"/Random"
+      }
+    ],
+    "location":{
+      "configuration":"launch_files4"
+    },
+    "rule":"user:parameters_readers"
+  }
+]

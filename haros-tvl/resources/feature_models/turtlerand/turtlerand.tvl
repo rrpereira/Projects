@@ -1,0 +1,12 @@
+root Turtlerand {
+	group allOf {
+		Turtlesim group someOf {
+		opt Teleop,
+		opt Random
+		}
+	}
+
+	//Multiplexer -> (Teleop && Random);
+	//!Multiplexer -> !(Teleop && Random); 
+}
+

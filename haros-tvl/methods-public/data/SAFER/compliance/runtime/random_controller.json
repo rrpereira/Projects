@@ -1,0 +1,15 @@
+[
+  {
+    "comment":"Query found: NodeInstance random_controller:/random_controller\nReported in configuration random_controller",
+    "resources":[
+      {
+        "resourceType":"node",
+        "name":"/random_controller"
+      }
+    ],
+    "location":{
+      "configuration":"random_controller"
+    },
+    "rule":"user:parameters_readers"
+  }
+]
