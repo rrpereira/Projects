@@ -1,6 +1,6 @@
 # Instabot
 
-The automotive domain is full of critical systems/situations where a formal specification is absolutly essential. The goal of this project was to model the Speed Control System behavior of a car. The specification considers multiple factors of which, speed value, speed limits, lever position, brake pedal, are a few.
+Instabot is a software tool that interacts with Instagram®.  
 
 
 ## Tools
