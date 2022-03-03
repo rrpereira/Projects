@@ -3,10 +3,9 @@
 The automotive domain is full of critical systems/situations where a formal specification is absolutly essential. The goal of this project was to model the Speed Control System behavior of a car. The specification considers multiple factors of which, speed value, speed limits, lever position, brake pedal, are a few.
 
 
-
 ## Tools
 
-[<img src="https://user-images.githubusercontent.com/36520545/156652629-af8fc301-fbcc-4f39-bccb-7c6681809bc3.jpg" width="100" height="100">](https://nodejs.org/)
+[<img src="https://user-images.githubusercontent.com/36520545/156653017-a174ead3-0d54-4b7d-a273-3d2537330b11.png" width="100" height="100">](https://nodejs.org/)
 
 <img src="user-images.githubusercontent.com/36520545/156652629-af8fc301-fbcc-4f39-bccb-7c6681809bc3.jpg" width="100" height="100">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/36520545/156652120-8822fa40-107e-45e1-a2cd-f759825134d7.jpg">&nbsp;&nbsp;&nbsp;&nbsp;[![alt text](https://camo.githubusercontent.com/586ccf0aad9684edc821658cee04146cf36d1f1d5ec904bbefd72728909ccb2e/68747470733a2f2f64336a732e6f72672f6c6f676f2e737667)](https://d3js.org/)&nbsp;&nbsp;&nbsp;&nbsp;
 
