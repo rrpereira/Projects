@@ -49,9 +49,9 @@ The user has to create a "data" folder at the same level of instabot (this proje
 
 ## Execution
 
-'''
+```
 python3 instabot.py
-'''
+```
 
 
 ### Commenting a post 
