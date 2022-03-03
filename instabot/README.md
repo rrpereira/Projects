@@ -7,11 +7,6 @@ The automotive domain is full of critical systems/situations where a formal spec
 
 [<img src="https://user-images.githubusercontent.com/36520545/156653017-a174ead3-0d54-4b7d-a273-3d2537330b11.png" width="100" height="100">](https://nodejs.org/) [<img src="https://user-images.githubusercontent.com/36520545/156652120-8822fa40-107e-45e1-a2cd-f759825134d7.jpg" width="100" height="100">](https://nodejs.org/)
 
-
-
-
-<img src="user-images.githubusercontent.com/36520545/156652629-af8fc301-fbcc-4f39-bccb-7c6681809bc3.jpg" width="100" height="100">&nbsp;&nbsp;&nbsp;&nbsp;<img src="">&nbsp;&nbsp;&nbsp;&nbsp;[![alt text](https://camo.githubusercontent.com/586ccf0aad9684edc821658cee04146cf36d1f1d5ec904bbefd72728909ccb2e/68747470733a2f2f64336a732e6f72672f6c6f676f2e737667)](https://d3js.org/)&nbsp;&nbsp;&nbsp;&nbsp;
-
 ## Abstract
 
 In essence, we define multiple **variables** to which we assign multiple values. The content of each of these variables changes according to a given **predicate** that fits the actual state. In another words, given a state, there are one or more actions that can be applied to that state, as long as these action(s) (predicate(s)) match the same given state. There are also **invariants** which are conditional expressions that are constantly compared to the actual state - these assess if there isn't any incompatibility of the state with the existing properties. 
