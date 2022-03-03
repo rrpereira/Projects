@@ -1,6 +1,6 @@
 # Instabot
 
-Instabot is a software tool that interacts with Instagram®.  
+Instabot is a software tool that interacts with Instagram ®. The main goal of this tool was initially to automate the process of commenting on giveaway posts. This type of contest happens quite frequently on Instagram ® and they consist in choosing a random comment between all the comments made on that giveaway post. The person who did that comment wins the announced prize. Therefore, the more a user comments on that post, the more probability he has to win the prize.  
 
 
 ## Tools
