@@ -5,7 +5,7 @@ The automotive domain is full of critical systems/situations where a formal spec
 
 ## Tools
 
-[<img src="https://user-images.githubusercontent.com/36520545/156653017-a174ead3-0d54-4b7d-a273-3d2537330b11.png" width="100" height="100">](https://nodejs.org/) [<img src="https://user-images.githubusercontent.com/36520545/156652120-8822fa40-107e-45e1-a2cd-f759825134d7.jpg" width="100" height="100">](https://nodejs.org/)
+[<img src="https://user-images.githubusercontent.com/36520545/156653017-a174ead3-0d54-4b7d-a273-3d2537330b11.png" width="100" height="100">](https://www.python.org/) [<img src="https://user-images.githubusercontent.com/36520545/156652120-8822fa40-107e-45e1-a2cd-f759825134d7.jpg" width="100" height="100">](https://www.selenium.dev/)
 
 ## Abstract
 
