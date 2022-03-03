@@ -1,12 +1,12 @@
-# Speed Control System (SCS) Modelling
+# Instabot
 
 The automotive domain is full of critical systems/situations where a formal specification is absolutly essential. The goal of this project was to model the Speed Control System behavior of a car. The specification considers multiple factors of which, speed value, speed limits, lever position, brake pedal, are a few.
 
+![sbUizSli_400x400]()
 
 ## Tools
 
-[![alt text](https://lamport.azurewebsites.net/tla/splash_small.png)](https://lamport.azurewebsites.net/tla/tla.html)
-
+<img src="https://www.google.com/search?q=python&sxsrf=APq-WBvg37oEbuNst8EgcGJ0QA5uaavWrw:1646341230593&tbm=isch&source=iu&ictx=1&vet=1&fir=SzFSgHmbCfpo0M%252C3wRBXLyvECcz0M%252C%252Fm%252F05z1_%253BixLPvIGCxxQDOM%252Cb37zPX1cmGt4dM%252C_%253B9fpps9heKSdsMM%252Cl4uursrE5fcXFM%252C_%253BbnGlJT9DWV6sSM%252CvpvniGoO8XHDbM%252C_%253BOO5BXHlBkMORMM%252CaKYfmusl-3RmbM%252C_&usg=AI4_-kS5EwcVRT5-cbCJ-NIaWtaWrUEjwA&sa=X&ved=2ahUKEwiAtumB66r2AhUD2KQKHd7bCpEQ_B16BAgzEAE#imgrc=SzFSgHmbCfpo0M" width="100" height="100">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/36520545/156652120-8822fa40-107e-45e1-a2cd-f759825134d7.jpg">&nbsp;&nbsp;&nbsp;&nbsp;[![alt text](https://camo.githubusercontent.com/586ccf0aad9684edc821658cee04146cf36d1f1d5ec904bbefd72728909ccb2e/68747470733a2f2f64336a732e6f72672f6c6f676f2e737667)](https://d3js.org/)&nbsp;&nbsp;&nbsp;&nbsp;[<img src="https://avatars.githubusercontent.com/u/9950313?s=200&v=4" width="100" height="100">](https://nodejs.org/)
 
 ## Abstract
 
